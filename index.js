@@ -41,6 +41,33 @@ class LinkedList {
     getAt(index) {
         let counter = 0;
         let node = this.head;
+        while(node) {
+            if(counter === index) {
+                return node;
+            }
+            counter++;
+            node = node.next;
+        }
+        return null
+    }
+
+    insertAt(data, index) {
+        // if list is empty
+        if(!this.head) {
+            this.head = new ListNode(data);
+            return;
+        }
+
+        // if new node needs to be inserted at the front of list
+        if(index === 0) {
+            this.head = new ListNode(data, this.head);
+        }
+
+        const previous = this.getAt(index - 1);
+        let newNode = new ListNode(data);
+        newNode.next = previous.next;
+        previous.next = newNode;
+        return this.head;
     }
 
     insertNodeAtStart(data) {
@@ -79,5 +106,7 @@ class LinkedList {
 let list = new LinkedList()
 console.log(list);
 list.insertNodeAtStart(10);
-list.insertNodeAtStart(10);
+list.insertNodeAtEnd(20);
+list.insertNodeAtEnd(30);
+list.insertNodeAtEnd(40);
 console.log(list);
